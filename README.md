@@ -8,13 +8,26 @@ We will only retain gcc from the old linux setup. Assuming gcc >= 4.3.
 
 - We only need python2 for scons.
 - Download miniconda 2.7 64-bit bash installer from conda.pydata.org/miniconda.html
-- chmod +x Miniconda2-latest-Linux-x86_64.sh
+- Change permissions on the downloaded script
+```bash
+chmod +x Miniconda2-latest-Linux-x86_64.sh
+```
+
 - Execute Miniconda2-latest-Linux-x86_64.sh 
    - Pick an install location, e.g, /home/agram/python/miniconda2
+```bash
+./Miniconda2-latest-Linux-x86_64.sh 
+```
+   
 - Add "bin" directory to PATH (pre-pend it).
-- conda update --all 
-   - To make sure that python2 is up to date
-- conda install scons
+- Update the miniconda installation
+```bash
+conda update --all 
+```
+- Install scons
+```bash
+conda install scons
+```
 
 
 ### Anaconda3
