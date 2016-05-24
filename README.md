@@ -59,7 +59,7 @@ conda3 update --all
 ### Anaconda3 package management
 
 ```bash
-conda3 remove --features mkl   (If it gets built with mkl. This will get rid of annoying messages from mkl)
+conda3 remove --features mkl   (If conda uses mkl. This will get rid of annoying messages from mkl)
 conda3 install krb5
 conda3 install gdal
 export GDAL_DATA="/home/agram/python/anaconda3/share"
