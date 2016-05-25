@@ -48,7 +48,10 @@ chmod +x Anaconda3-4.0.0-Linux-x86_64.sh
 ```bash
 ln -s /home/agram/python/anaconda3/bin/conda /home/agram/python/anaconda3/bin/conda3
 ```
-
+-Add conda-forge to list of channels for the latest libraries
+```bash
+conda3 config --add channels conda-forge
+```
 - Update the anaconda installation
 ```bash
 conda3 update --all
