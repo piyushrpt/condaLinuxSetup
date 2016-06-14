@@ -87,8 +87,8 @@ set-alias       "rm"    "rm -i"
 set-alias       "cp"    "cp -i"
 set-alias       "mv"    "mv -i"
 
-prepend-path    PATH            /home/agram/pylib/anaconda34/bin
-prepend-path    PATH            /home/agram/pylib/anaconda27/bin
+prepend-path    PATH            /home/agram/python/anaconda3/bin
+prepend-path    PATH            /home/agram/python/miniconda2/bin
 ```
 
 Note that you will have to either source .bashrc or start a new terminal to activate the recent changes you made.
