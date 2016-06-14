@@ -86,3 +86,5 @@ prepend-path    PATH            /home/agram/pylib/anaconda34/bin
 prepend-path    PATH            /home/agram/pylib/anaconda27/bin
 ```
 
+Note that you will have to either source .bashrc or start a new terminal to activate the recent changes you made.
+
