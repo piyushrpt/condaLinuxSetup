@@ -53,11 +53,16 @@ module load basic
 We will create a default module file that will use your anaconda setup.
 
 Here is a template for the basic module file. Please modify contents to suit your needs.
-The main purpose of this basic module is to 
-1) Use recently installed miniconda2 as your default python
-2) Use recently installed anaconda3 as your default python3
-3) Not mangle your environment with unnecessary PATH and PYTHONPATH variables. These should be organized as their own modules.
+The main purpose of this basic module is to :
 
+1. Use recently installed miniconda2 as your default python/ ipython
+2. Use recently installed anaconda3 as your default python3/ ipython3
+3. Not mangle your environment with unnecessary PATH and PYTHONPATH variables. These should be organized as their own modules.
+
+```bash
+> vi /home/agram/privatemodules/basic
+```
+Copy the template shown below and make edits as needed.
 ```bash
 #%Module1.0#####################################################################
 ##
