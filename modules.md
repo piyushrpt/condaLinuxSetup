@@ -41,5 +41,48 @@ fi
 ###Initialize modules
 source /usr/share/Modules/init/bash
 ###Instruct to use modules from your home folder
-module load use.own
+module load use.own basic
+
+###You can also load basic environment at startup (optional)
+module load basic
 ```
+
+
+### Setting up basic environment
+
+We will create a default module file that will use your anaconda setup.
+
+Here is a template for the basic module file. Please modify contents to suit your needs.
+The main purpose of this basic module is to 
+1) Use recently installed miniconda2 as your default python
+2) Use recently installed anaconda3 as your default python3
+3) Not mangle your environment with unnecessary PATH and PYTHONPATH variables. These should be organized as their own modules.
+
+```bash
+#%Module1.0#####################################################################
+##
+## dot modulefile
+##
+## modulefiles/dot.  Generated from dot.in by configure.
+##
+proc ModulesHelp { } {
+        global dotversion
+
+        puts stderr "\tSetting up basic default environment"
+        puts stderr "\n\tVersion $dotversion\n"
+}
+
+module-whatis   "sets up basic default environment"
+
+# for Tcl script use only
+set     dotversion      3.2.10
+
+###Make file deletes and moves interactive to avoid overwriting.
+set-alias       "rm"    "rm -i"
+set-alias       "cp"    "cp -i"
+set-alias       "mv"    "mv -i"
+
+prepend-path    PATH            /home/agram/pylib/anaconda34/bin
+prepend-path    PATH            /home/agram/pylib/anaconda27/bin
+```
+
