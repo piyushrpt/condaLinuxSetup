@@ -15,14 +15,13 @@ chmod +x Miniconda2-latest-Linux-x86_64.sh
 ./Miniconda2-latest-Linux-x86_64.sh 
 ```
    
-- Add "bin" directory to PATH (pre-pend it).
 - Update the miniconda installation
 ```bash
-conda update --all 
+/home/agram/python/miniconda2/bin/conda update --all 
 ```
 - Install scons
 ```bash
-conda install scons
+/home/agram/python/miniconda2/bin/conda install scons
 ```
 
 
@@ -39,28 +38,27 @@ chmod +x Anaconda3-4.0.0-Linux-x86_64.sh
 ./Anaconda-3.4.0.0-Linux-x86_64.sh
 ```
 
-- Add "bin" directory to PATH (make sure miniconda2 comes first and then anaconda3)
 - Link conda from anaconda3 to conda3
 ```bash
 ln -s /home/agram/python/anaconda3/bin/conda /home/agram/python/anaconda3/bin/conda3
 ```
 -Add conda-forge to list of channels for the latest libraries
 ```bash
-conda3 config --add channels conda-forge
+/home/agram/python/miniconda2/bin/conda3 config --add channels conda-forge
 ```
 - Update the anaconda installation
 ```bash
-conda3 update --all
+/home/agram/python/miniconda2/bin/conda3 update --all
 ```
 
 ### Anaconda3 package management
 
 ```bash
-conda3 remove --features mkl   (If conda uses mkl. This will get rid of annoying messages from mkl)
-conda3 install krb5
-conda3 install gdal
+/home/agram/python/miniconda2/bin/conda3 remove --features mkl   (If conda uses mkl. This will get rid of annoying messages from mkl)
+/home/agram/python/miniconda2/bin/conda3 install krb5
+/home/agram/python/miniconda2/bin/conda3 install gdal
 export GDAL_DATA="/home/agram/python/anaconda3/share"
-conda3 install libgdal
-conda3 install netcdf4
-conda install -c omnia fftw3f=3.3.4
+/home/agram/python/miniconda2/bin/conda3 install libgdal
+/home/agram/python/miniconda2/bin/conda3 install netcdf4
+/home/agram/python/miniconda2/bin/conda install -c omnia fftw3f=3.3.4
 ```
