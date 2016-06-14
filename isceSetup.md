@@ -124,9 +124,9 @@ PRJ_SCONS_BUILD = /home/agram/tools/isce/build/201604
 #Install Directory (must end with isce)
 PRJ_SCONS_INSTALL = /home/agram/tools/isce/install/201604/isce
 
-LIBPATH =  /home/agram/pylib/anaconda3/lib /usr/lib64 /usr/lib 
-CPPPATH =  /home/agram/pylib/anaconda3/include/python3.5m /home/agram/pylib/anaconda3/include /usr/include
-FORTRANPATH =  /home/agram/pylib/anaconda3/include /usr/include
+LIBPATH =  /home/agram/python/anaconda3/lib /usr/lib64 /usr/lib 
+CPPPATH =  /home/agram/python/anaconda3/include/python3.5m /home/agram/python/anaconda3/include /usr/include
+FORTRANPATH =  /home/agram/python/anaconda3/include /usr/include
 FORTRAN = gfortran
 CC = gcc
 
