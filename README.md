@@ -14,7 +14,7 @@ Here is an alternate method, if you are interested.
 
 ### Miniconda2
 
-- We only need python2 for scons.
+- We only need python2 for scons. You can instead choose to install anaconda2 and get the full installation as well.
 - Download miniconda 2.7 64-bit bash installer from conda.pydata.org/miniconda.html
 - Change permissions on the downloaded script
 ```bash
@@ -64,8 +64,6 @@ conda3 config --add channels conda-forge
 ```bash
 conda3 update --all
 ```
-
-- Add "lib" directory of anaconda3 install to `LD_LIBRARY_PATH`
 
 ### Anaconda3 package management
 
