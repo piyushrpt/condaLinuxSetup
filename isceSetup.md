@@ -10,9 +10,9 @@ We just use these to simplify instructions.
 
 |   VARIABLE   |   MY VALUE                        |     Comment                               |
 |--------------|-----------------------------------|-------------------------------------------|
-|    HOME      |  /home/ubuntu                     |  Default home directory                   |
-|    ROOT      |  /home/ubuntu/tools/isce          |  ROOT folder for ISCE installation        |
-|    MODDIR    |  /home/ubuntu/privatemodules/isce |  Folder for storing module files for ISCE |
+|    HOME      |  /home/agram                      |  Default home directory                   |
+|    ROOT      |  /home/agram/tools/isce           |  ROOT folder for ISCE installation        |
+|    MODDIR    |  /home/agram/privatemodules/isce |  Folder for storing module files for ISCE |
 |    VERSION   |  201604                           |  Version number of ISCE release           |
 
 
@@ -26,7 +26,7 @@ If you have an old version installed using these very set of instructions, you d
 
 1. Create the directory ROOT . This directory will contain all future ISCE installations.
 ```bash
-> mkdir /home/ubuntu/tools/isce
+> mkdir /home/agram/tools/isce
 ```
 
 2. Create the following subdirectories under ROOT.
@@ -41,7 +41,7 @@ ROOT
 
 The commands for creating this directory structure
 ```bash
-> cd /home/ubuntu/tools/isce
+> cd /home/agram/tools/isce
 > mkdir config src build install
 ```
 
@@ -90,7 +90,7 @@ ROOT
 
 Commands for setting up this directory structure
 ```bash
-> cd /home/ubuntu/tools/isce
+> cd /home/agram/tools/isce
 > mkdir config/201604 src/201604 build/201604 install/201604
 ```
 
@@ -100,7 +100,7 @@ Commands for setting up this directory structure
 Untar the downloaded tarball in the src/VERSION folder. This will unpack a directory called isce. 
 
 ```bash
-> cd /home/ubuntu/tools/isce/src/201604
+> cd /home/agram/tools/isce/src/201604
 > tar xjvf ~/Downloads/isce-2.0.0_201604.tar.bz2
 ```
 
@@ -110,7 +110,7 @@ Untar the downloaded tarball in the src/VERSION folder. This will unpack a direc
 SConfigISCE is the configuration file used to set paths to the correct directories for building ISCE. We will create a new SConfigISCE for each version to ensure the ability to modify every installed version as needed. The SConfigISCE file needs to be created under ROOT/config/VERSION folder.
 
 ```bash
-> cd /home/ubuntu/tools/isce/config/201604
+> cd /home/agram/tools/isce/config/201604
 > vi SConfigISCE
 ```
 
@@ -119,14 +119,14 @@ The template for SConfigISCE is shown below. You only need to change the PRJ_SCO
 ```bash
 
 #Build Directory
-PRJ_SCONS_BUILD = /home/ubuntu/tools/isce/build/201604  
+PRJ_SCONS_BUILD = /home/agram/tools/isce/build/201604  
 
-#Install Directory
-PRJ_SCONS_INSTALL = /home/ubuntu/tools/isce/install/201604/isce
+#Install Directory (must end with isce)
+PRJ_SCONS_INSTALL = /home/agram/tools/isce/install/201604/isce
 
-LIBPATH =  /usr/lib64
-CPPPATH =  /usr/include/python3.5m
-FORTRANPATH =  /usr/include
+LIBPATH =  /home/agram/python/anaconda3/lib /usr/lib64 /usr/lib 
+CPPPATH =  /home/agram/python/anaconda3/include/python3.5m /home/agram/python/anaconda3/include /usr/include
+FORTRANPATH =  /home/agram/python/anaconda3/include /usr/include
 FORTRAN = gfortran
 CC = gcc
 
@@ -167,7 +167,7 @@ set     version      3.2.10
 #Change this for each version
 set     isceversion 201604
 
-set		basedir		/home/ubuntu/tools/isce
+set		basedir		/home/agram/tools/isce
 set		installdir      $basedir/install/$isceversion/isce
 setenv		ISCE_HOME	    $installdir
 setenv		SCONS_CONFIG_DIR    $basedir/config/$isceversion
@@ -207,7 +207,7 @@ module load isce/201612
 
 Change to the source directory and use scons to install.
 ```bash
-> cd /home/ubuntu/tools/isce/src/201604/isce
+> cd /home/agram/tools/isce/src/201604/isce
 > scons install
 ```
 
