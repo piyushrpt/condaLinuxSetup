@@ -44,21 +44,21 @@ ln -s /home/agram/python/anaconda3/bin/conda /home/agram/python/anaconda3/bin/co
 ```
 -Add conda-forge to list of channels for the latest libraries
 ```bash
-/home/agram/python/miniconda2/bin/conda3 config --add channels conda-forge
+/home/agram/python/anaconda3/bin/conda3 config --add channels conda-forge
 ```
 - Update the anaconda installation
 ```bash
-/home/agram/python/miniconda2/bin/conda3 update --all
+/home/agram/python/anaconda3/bin/conda3 update --all
 ```
 
 ### Anaconda3 package management
 
 ```bash
-/home/agram/python/miniconda2/bin/conda3 remove --features mkl   (If conda uses mkl. This will get rid of annoying messages from mkl)
-/home/agram/python/miniconda2/bin/conda3 install krb5
-/home/agram/python/miniconda2/bin/conda3 install gdal
+/home/agram/python/anaconda3/bin/conda3 remove --features mkl   (If conda uses mkl. This will get rid of annoying messages from mkl)
+/home/agram/python/anaconda3/bin/conda3 install krb5
+/home/agram/python/anaconda3/bin/conda3 install gdal
 export GDAL_DATA="/home/agram/python/anaconda3/share"
-/home/agram/python/miniconda2/bin/conda3 install libgdal
-/home/agram/python/miniconda2/bin/conda3 install netcdf4
-/home/agram/python/miniconda2/bin/conda install -c omnia fftw3f=3.3.4
+/home/agram/python/anaconda3/bin/conda3 install libgdal
+/home/agram/python/anaconda3/bin/conda3 install netcdf4
+/home/agram/python/anaconda3/bin/conda install -c omnia fftw3f=3.3.4
 ```
