@@ -1,20 +1,8 @@
-# oldLinuxSetup
-
-
-A nice clean method for setting up ISCE using a single anaconda installation is provided here:
-[https://github.com/scottyhq/isce_notes](https://github.com/scottyhq/isce_notes)
-You should probably follow the instructions provided in the link above.
-
-
-
-Setup python environment using anaconda on old linux machines
-We will only retain gcc from the old linux setup. Assuming gcc >= 4.3.
-
-Here is an alternate method, if you are interested. 
+# Setting up Python2 and Python3 using Anaconda
 
 ### Miniconda2
 
-- We only need python2 for scons. You can instead choose to install anaconda2 and get the full installation as well.
+- We only need python2 for scons. You can instead choose to install all of anaconda2 as well, if needed.
 - Download miniconda 2.7 64-bit bash installer from conda.pydata.org/miniconda.html
 - Change permissions on the downloaded script
 ```bash
