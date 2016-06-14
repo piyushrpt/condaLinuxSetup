@@ -6,6 +6,8 @@ A nice clean method for setting up ISCE using a single anaconda installation is 
 You should probably follow the instructions provided in the link above.
 
 
+If not, here is an alternate setup that tries to keep installation of python2 and python3 independent.
+
 The setup of ISCE on your machine is broken down into 3 parts:
 
 1. [Anaconda setup for both python2 and python3](./anaconda.md)
