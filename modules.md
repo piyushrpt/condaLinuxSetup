@@ -5,7 +5,7 @@ This section describes the setting up of "environment modules" on your old linux
 
 ####Option 1: Use yum / apt
 
-Most linux distros include a version of modules (atleast now a days). 
+Most linux distros include a version of modules (atleast nowadays). 
 ```bash
 > sudo yum install environment-modules
 
