@@ -41,7 +41,7 @@ fi
 ###Initialize modules
 source /usr/share/Modules/init/bash
 ###Instruct to use modules from your home folder
-module load use.own basic
+module load use.own
 
 ###You can also load basic environment at startup (optional)
 module load basic
