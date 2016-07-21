@@ -59,6 +59,5 @@ ln -s /home/agram/python/anaconda3/bin/conda /home/agram/python/anaconda3/bin/co
 /home/agram/python/anaconda3/bin/conda3 install gdal
 export GDAL_DATA="/home/agram/python/anaconda3/share"
 /home/agram/python/anaconda3/bin/conda3 install libgdal
-/home/agram/python/anaconda3/bin/conda3 install netcdf4
 /home/agram/python/anaconda3/bin/conda3 install -c omnia fftw3f=3.3.4
 ```
