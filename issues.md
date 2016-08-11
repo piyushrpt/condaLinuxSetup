@@ -31,3 +31,10 @@ Some versions of gdal have libuuid listed as a dependency by error. You can fix 
 ```bash
 conda3 uninstall libuuid
 ```
+
+## Recode from CP437 to UTF-8 failed with the error: "Invalid argument"
+Soln:
+Set the environment variable CPL_ZIP_ENCODING=UTF-8
+```bash
+export CPL_ZIP_ENCODING=UTF-8
+```
