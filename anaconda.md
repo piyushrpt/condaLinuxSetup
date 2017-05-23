@@ -57,6 +57,13 @@ ln -s /home/agram/python/anaconda3/bin/conda /home/agram/python/anaconda3/bin/co
 /home/agram/python/anaconda3/bin/conda3 update --all
 ```
 
+- Create a link for cython3 
+```bash
+ln -s /home/agram/python/anaconda3/bin/cython /home/agram/python/anaconda3/bin/cython3
+```
+This is the only mechanism for distinguishing between cython2 and cython3 (same as python2 and python3).
+
+
 ### Anaconda3 package management
 
 ```bash
