@@ -48,7 +48,7 @@ ln -s /home/agram/python/anaconda3/bin/conda /home/agram/python/anaconda3/bin/co
 
 - You only need this command if you really want to work with the latest version of some library. I primarily used it to get the latest gdal library (before version 2.0 became available by default). This can break your regular setup if you are not familiar with using conda. So use this command with caution. Add conda-forge to list of channels for the latest libraries
 ```bash
-/home/agram/python/anaconda3/bin/conda3 config --add channels conda-forge
+/home/agram/python/anaconda3/bin/conda3 config --append channels conda-forge
 ```
 
 
