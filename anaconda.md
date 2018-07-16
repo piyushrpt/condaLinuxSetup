@@ -3,6 +3,8 @@
 If you already have python2.7 installed, install "scons" for it.
 If you already have "scons" as well, you can skip the miniconda2 instructions.
 
+**Latest Update: scons is now available for python3. You can use anaconda3 to install scons. Installing miniconda2 is completely optional.**
+
 ### Miniconda2
 
 - We only need python2 for scons. You can instead choose to install all of anaconda2 as well, if needed.
