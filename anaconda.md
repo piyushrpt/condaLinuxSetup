@@ -11,12 +11,12 @@ Anaconda3-5.2.0-Linux-x86_64.sh downloaded on 2018-07-19.
 - Download anaconda 3.5 64-bit bash installer from www.continuum.io/downloads
 - Changer permissions on the downloaded script
 ```bash
-chmod +x Anaconda3-4.0.0-Linux-x86_64.sh
+chmod +x Anaconda3-5.2.0-Linux-x86_64.sh
 ```
-- Execute Anaconda3-4.0.0-Linux-x86_64.sh
+- Execute Anaconda3-5.2.0-Linux-x86_64.sh
    - Pick an install location, e.g, /home/agram/python/anaconda3
 ```bash
-./Anaconda-3.4.0.0-Linux-x86_64.sh
+./Anaconda-3.5.2.0-Linux-x86_64.sh
 ```
 
 - Update the anaconda installation
