@@ -5,9 +5,9 @@ Anaconda is a powerful package manager but some incompatibilities within differe
 This section attempts to address some of these issues. We will try to time tag the issues - not all of them maybe relevant to your use case.
 
 
-##undefined reference to uuid_..   (2018-07)
+## undefined reference to uuid ..  (2018-07)
 
-There seems to be an issue with conda's handling of libuuid versions. 
+There seems to be an issue with conda's handling of libuuid versions. This causes failure to recognize that libXm and libXt are available on the machine.
 
 Solution:
 
