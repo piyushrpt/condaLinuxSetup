@@ -55,9 +55,8 @@ We will create a default module file that will use your anaconda setup.
 Here is a template for the basic module file. Please modify contents to suit your needs.
 The main purpose of this basic module is to :
 
-1. Use recently installed miniconda2 as your default python/ ipython
-2. Use recently installed anaconda3 as your default python3/ ipython3
-3. Not mangle your environment with unnecessary PATH and PYTHONPATH variables. These should be organized as their own modules.
+1. Use recently installed anaconda3 as your default python3/ ipython3
+2. Not mangle your environment with unnecessary PATH and PYTHONPATH variables. These should be organized as their own modules.
 
 ```bash
 > vi /home/agram/privatemodules/basic
@@ -88,7 +87,19 @@ set-alias       "cp"    "cp -i"
 set-alias       "mv"    "mv -i"
 
 prepend-path    PATH            /home/agram/python/anaconda3/bin
-prepend-path    PATH            /home/agram/python/miniconda2/bin
+prepend-path    LD_RUN_PATH     /home/agram/python/anaconda3/lib
+append-path     PYTHONPATH      /home/agram/python/anaconda3/lib/python3.6/site-packages
+
+##CUDA related stuff
+prepend-path    PATH            /usr/local/cuda/bin
+prepend-path    LD_LIBRARY_PATH /usr/lib64/nvidia
+prepend-path    LD_RUN_PATH     /usr/local/cuda-9.1/lib64
+
+##GDAL environment
+setenv      GDAL_DATA       /home/agram/python/anaconda3/share/gdal
+
+##Control number of threads
+setenv      OMP_NUM_THREADS     8
 ```
 
 Note that you will have to either source .bashrc or start a new terminal to activate the recent changes you made.

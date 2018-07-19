@@ -2,35 +2,30 @@
 
 This page is a collection of common issues that one may encounter when trying to setup ISCE with anaconda.
 Anaconda is a powerful package manager but some incompatibilities within different libraries does creep in.
-This section attempts to address some of these issues:
+This section attempts to address some of these issues. We will try to time tag the issues - not all of them maybe relevant to your use case.
 
-##libjpeg.so.8 missing / incompatible
-Soln:
-The most common cause for this is that your GDAL version is not in sync with other libraries. 
 
+##undefined reference to uuid_..   (2018-07)
+
+There seems to be an issue with conda's handling of libuuid versions. 
+
+Solution:
+
+1. Find path to libuuid used by libXm and libSM
 ```bash
-conda3 update gdal
+> ldd /lib64/libSM.so | grep uuid
+> ls -ltr /lib64/libuuid.so.1
 ```
 
-##  "from osgeo import gdal" doesn't work
-Soln:
-The most common case for this is that you dont have libgdal installed on your machine or it is outdated.
-
+2. Link libuuid from anaconda to this library
 ```bash
-conda3 install libgdal
-
-(or)
-
-conda3 update libgdal
+> cd /home/agram/anaconda3/lib
+> unlink libuuid.so     (should be a link to libuuid.so.1.0.0)
+> unlink libuuid.so.1   (should be a link to libuuid.so.1.0.0)
+> ln -s /lib64/libuuid.so.1.3.0 libuuid.so
+> ln -s /lib64/libuuid.so.1.3.0 libuuid.so.1
 ```
 
-## libuuid.so missing / incompatible
-Soln:
-Some versions of gdal have libuuid listed as a dependency by error. You can fix this by uninstalling libuuid
-
-```bash
-conda3 uninstall libuuid
-```
 
 ## Recode from CP437 to UTF-8 failed with the error: "Invalid argument"
 Soln:

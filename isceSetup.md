@@ -13,7 +13,7 @@ We just use these to simplify instructions.
 |    HOME      |  /home/agram                      |  Default home directory                   |
 |    ROOT      |  /home/agram/tools/isce           |  ROOT folder for ISCE installation        |
 |    MODDIR    |  /home/agram/privatemodules/isce |  Folder for storing module files for ISCE |
-|    VERSION   |  201604                           |  Version number of ISCE release           |
+|    VERSION   |  201807                           |  Version number of ISCE release           |
 
 
 
@@ -66,9 +66,9 @@ The commands for creating this directory structure
 
 Tarballs of different versions of ISCE can be found [here](https://winsar.unavco.org/isce.html)
 
-To generalize the instructions, we will refer to the downloaded tarball as "isce-2.0.0_VERSION.tar.bz2".
+To generalize the instructions, we will refer to the downloaded tarball as "isce-2.2.0_VERSION.tar.bz2".
 
-At the time of writing these instructions, the latest version was "201604".
+At the time of writing these instructions, the latest version was "201807".
 
 
 ###Step 3: Create subfolders for the new version
@@ -91,7 +91,7 @@ ROOT
 Commands for setting up this directory structure
 ```bash
 > cd /home/agram/tools/isce
-> mkdir config/201604 src/201604 build/201604 install/201604
+> mkdir config/201807 src/201604 build/201604 install/201807
 ```
 
 ###Step 4: Untar downloaded tarball in src/VERSION
@@ -100,8 +100,8 @@ Commands for setting up this directory structure
 Untar the downloaded tarball in the src/VERSION folder. This will unpack a directory called isce. 
 
 ```bash
-> cd /home/agram/tools/isce/src/201604
-> tar xjvf ~/Downloads/isce-2.0.0_201604.tar.bz2
+> cd /home/agram/tools/isce/src/201807
+> tar xjvf ~/Downloads/isce-2.2.0.tar.bz2
 ```
 
 ###Step 5: Create SConfigISCE file in config/VERSION
@@ -110,7 +110,7 @@ Untar the downloaded tarball in the src/VERSION folder. This will unpack a direc
 SConfigISCE is the configuration file used to set paths to the correct directories for building ISCE. We will create a new SConfigISCE for each version to ensure the ability to modify every installed version as needed. The SConfigISCE file needs to be created under ROOT/config/VERSION folder.
 
 ```bash
-> cd /home/agram/tools/isce/config/201604
+> cd /home/agram/tools/isce/config/201807
 > vi SConfigISCE
 ```
 
@@ -119,13 +119,13 @@ The template for SConfigISCE is shown below. You only need to change the PRJ_SCO
 ```bash
 
 #Build Directory
-PRJ_SCONS_BUILD = /home/agram/tools/isce/build/201604  
+PRJ_SCONS_BUILD = /home/agram/tools/isce/build/201807  
 
 #Install Directory (must end with isce)
-PRJ_SCONS_INSTALL = /home/agram/tools/isce/install/201604/isce
+PRJ_SCONS_INSTALL = /home/agram/tools/isce/install/201807/isce
 
 LIBPATH =  /home/agram/python/anaconda3/lib /usr/lib64 /usr/lib 
-CPPPATH =  /home/agram/python/anaconda3/include/python3.5m /home/agram/python/anaconda3/include /usr/include
+CPPPATH =  /home/agram/python/anaconda3/include  /home/agram/python/anaconda3/include/python3.6m /home/agram/python/anaconda3/lib/python3.6/site-packages/numpy/core/include /usr/include
 FORTRANPATH =  /home/agram/python/anaconda3/include /usr/include
 FORTRAN = gfortran
 CC = gcc
@@ -134,6 +134,9 @@ MOTIFLIBPATH = /usr/lib64              # path to libXm.dylib
 X11LIBPATH = /usr/lib64                # path to libXt.dylib
 MOTIFINCPATH = /usr/include          # path to location of the Xm directory with various include files (.h)
 X11INCPATH = /usr/include            # path to location of the X11 directory with various include files
+
+##If you want to enable cuda
+ENABLE_CUDA = True
 ```
 
 ###Step 6: Setup modulefile for specific version of ISCE
@@ -165,7 +168,7 @@ module-whatis   "adds ISCE stuff to your environment"
 set     version      3.2.10
 
 #Change this for each version
-set     isceversion 201604
+set     isceversion 201807
 
 set		basedir		/home/agram/tools/isce
 set		installdir      $basedir/install/$isceversion/isce
@@ -185,8 +188,8 @@ prepend-path    PYTHONPATH    $basedir/install/$isceversion
 Once you have set this up, you should be able to see this module listed amongst the available modules:
 ```bash
 > module list
-  1) use.own        3) gee   5) isce/201604
-  2) basic          4) isce/201512
+  1) use.own        3) gee          5) isce/201807
+  2) basic          4) isce/201612
 ```
 
 If you don't see the isce module file listed, make sure you have loaded the "use.own" module
@@ -202,12 +205,12 @@ This instructs modules to look for module files in your HOME/privatemodules fold
 The first thing to do to use any version of ISCE or install a version of ISCE is to load the corresponding module. For this example, I execute
 
 ```bash
-module load isce/201612
+module load isce/201807
 ```
 
 Change to the source directory and use scons to install.
 ```bash
-> cd /home/agram/tools/isce/src/201604/isce
+> cd /home/agram/tools/isce/src/201807/isce
 > scons install
 ```
 
@@ -219,7 +222,7 @@ This should install isce. Run "scons install" twice to make sure that all compon
 You are now ready to use isce. Load the modulefile for the version you want to use and when you want to restore the environment, unload the module
 
 ```bash
-> module load isce/201604
+> module load isce/201807
 > .... Your work ....
 > module unload isce
 ```
