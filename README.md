@@ -3,7 +3,7 @@
 
 ## Using isce2 conda package as an end user
 
-This section is for users who are not interested in modifying underlying C/C++ code, but just want to install isce and use the available workflows and contributed scripts. End users will be available to install binaries for release versions directly without having to set up compilers etc. 
+This section is for users who are not interested in modifying underlying C/C++ code, but just want to install isce and use the available workflows and contributed scripts. Binaries for release versions will be available to end users for installation directly without having to set up compilers etc. 
 
 For details, see [here](./user/condauser.md)
 
