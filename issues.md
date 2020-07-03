@@ -5,6 +5,12 @@ Anaconda is a powerful package manager but some incompatibilities within differe
 This section attempts to address some of these issues. We will try to time tag the issues - not all of them maybe relevant to your use case.
 
 
+## cmake cannot find packages
+
+### clear local cache
+Clear out all contents of the build folder everytime you run the cmake command. If not cleared, cached results will be used by default and any change made to the cmake command will not be applied.
+
+
 ## scons cannot find packages
 
 ### clear local cache

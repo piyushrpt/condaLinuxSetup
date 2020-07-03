@@ -49,8 +49,9 @@ conda install -c conda-forge --file requirements.txt
 python>=3.7
 numpy
 scipy
+scikit-image
 cython
-scons
+cmake
 hdf5
 h5py
 gdal
@@ -67,8 +68,9 @@ requests
 python>=3.7
 numpy
 scipy
+scikit-image
 cython
-scons
+cmake
 hdf5
 h5py
 gdal
@@ -95,8 +97,5 @@ In the activated environment, create a link for cython3
 ln -s ${CONDA_PREFIX}/bin/cython ${CONDA_PREFIX}/bin/cython3
 ```
 
---
-**NOTE**
+#### NOTE :You should not hesitate to clean up your conda environments and recreate new ones as needed. Making changes to conda environments via activate.sh etc is probably a recipe for disaster. Get comfortable with setting up and dismantling conda environnments as needed. In general, updating an existing conda environment is also likely to result in incompatiblities between libraries. One is better off cleaning up and setting up a new environment from scratch to get newer versions of packages.
 
-You should not hesitate to clean up your conda environments and recreate new ones as needed. Making changes to conda environments via activate.sh etc is probably a recipe for disaster. Get comfortable with setting up and dismantling conda environnments as needed. In general, updating an existing conda environment is also likely to result in incompatiblities between libraries. One is better off cleaning up and setting up a new environment from scratch to get newer versions of packages.
---

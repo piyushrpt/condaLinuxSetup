@@ -1,5 +1,7 @@
-## Setting up ISCE 
+## Setting up ISCE2 
 -----------------------
+
+#### Note: This set of notes has been updated to use cmake instead of scons. The last version of repo with scons instructions is commit "fca7ba24cf680658503a84e1487881bf77147b89".
 
 This section describes the setting up of the ISCE software when you use anaconda for python.
 The setup is general and allows one to simultaneously install multiple versions on the machine.
@@ -11,8 +13,8 @@ We just use these to simplify instructions.
 |   VARIABLE   |   MY VALUE                        |     Comment                               |
 |--------------|-----------------------------------|-------------------------------------------|
 |    HOME      |  /home/agram                      |  Default home directory                   |
-|    ROOT      |  /home/agram/tools/isce           |  ROOT folder for ISCE installation        |
-|    MODDIR    |  /home/agram/privatemodules/isce |  Folder for storing module files for ISCE |
+|    ROOT      |  /home/agram/tools/isce2          |  ROOT folder for ISCE installation        |
+|    MODDIR    |  /home/agram/privatemodules/isce2 |  Folder for storing module files for ISCE |
 |    VERSION   |  201807                           |  Version number of ISCE release           |
 
 
@@ -26,7 +28,7 @@ If you have an old version installed using these very set of instructions, you d
 
 1. Create the directory ROOT . This directory will contain all future ISCE installations.
 ```bash
-> mkdir /home/agram/tools/isce
+> mkdir /home/agram/tools/isce2
 ```
 
 2. Create the following subdirectories under ROOT.
@@ -36,13 +38,12 @@ ROOT
 |--src
 |--build
 |--install
-|--config 
 ```
 
 The commands for creating this directory structure
 ```bash
-> cd /home/agram/tools/isce
-> mkdir config src build install
+> cd /home/agram/tools/isce2
+> mkdir src build install
 ```
 
 3. Create the directory MODDIR. This needs to be done in folder HOME/privatemodules. Environment modules looks for user-defined module files in this location.
@@ -51,13 +52,13 @@ HOME
 |
 |--privatemodules
 |  |
-|  |--isce
+|  |--isce2
 ```
 The commands for creating this directory structure
 ```bash
 > cd
 > mkdir privatemodules
-> mkdir privatemodules/isce
+> mkdir privatemodules/isce2
 ```
 
 
@@ -87,14 +88,12 @@ ROOT
 |  |--VERSION
 |--install
 |  |--VERSION
-|--config 
-|  |--VERSION
 ```
 
 Commands for setting up this directory structure
 ```bash
-> cd /home/agram/tools/isce
-> mkdir config/v2.3.3 src/v2.3.3 build/v2.3.3 install/v2.3.3
+> cd /home/agram/tools/isce2
+> mkdir src/latest build/latest install/latest
 ```
 
 ###Step 4: Untar tarball or clone repo in src/VERSION
@@ -103,8 +102,8 @@ Commands for setting up this directory structure
 Untar the downloaded tarball in the src/VERSION folder. This will unpack a directory called isce. 
 
 ```bash
-> cd /home/agram/tools/isce/src/v2.3.3
-> tar xzvf ~/Downloads/isce-v2.3.3.tar.gz
+> cd /home/agram/tools/isce2/src/latest
+> tar xzvf ~/Downloads/isce-latest.tar.gz
 ```
 
 If using the live git report
@@ -119,12 +118,12 @@ If using the live git report
 We use environment modules to activate/ deactivate a specific version of ISCE.
 Every version will need its own module file located at MODDIR/VERSION, that sets up appropriate environment variables and paths.
 
-Shown below is the template for isce/v2.3.3 located at /home/agram/privatemodules/isce/v2.3.3
+Shown below is the template for isce/latest located at /home/agram/privatemodules/isce2/latest
 
 ```bash
 #%Module1.0#####################################################################
 ##
-## isce modulefile
+## isce2 modulefile
 ##
 ## privatemodules/isce. Generated from dot.in by configure.
 ##
@@ -142,7 +141,7 @@ module-whatis   "adds ISCE stuff to your environment"
 set     version      3.2.10
 
 #Change this for each version
-set     isceversion "v2.3.3"
+set     isceversion "latest"
 
 ##Report conda env when being loaded
 ##To assist in debugging
@@ -152,24 +151,35 @@ if [ module-info mode load ] {
 }
 
 
-set		basedir		/home/agram/tools/isce
-set		installdir      $basedir/install/$isceversion/isce
-setenv		ISCE_HOME	    $installdir
-setenv		SCONS_CONFIG_DIR    $basedir/config/$isceversion
+## Save conda env as variable for debugging later
+set          condaprefix     [getenv CONDA_PREFIX]
+setenv       ISCE_CONDA_PREFIX  $condaprefix
 
-###To make apps available at command line
-prepend-path	PATH	$installdir/applications
+set		basedir		/home/agram/tools/isce2
+set             srcdir          $basedir/src/$isceversion/isce2
+set		installdir      $basedir/install/$isceversion
+setenv		ISCE_HOME	    $installdir/packages/isce
 
-###To make mdx and other utils available at command line
+
+###cmake command to be run from build/version
+###modify this line if you want to use your own compilers
+###other flags can be added here to control where cmake searches for packages
+set-alias       cmakeisce       "cmake -DCMAKE_INSTALL_PREFIX=$installdir -DCMAKE_PREFIX_PATH=$condaprefix $srcdir"
+
+###To make mdx and other apps available at command line
 prepend-path    PATH    $installdir/bin
 
+###Make shared libraries available
+append-path     LD_LIBRARY_PATH $installdir/lib
+
 ###To make isce importable in python
-prepend-path    PYTHONPATH    $basedir/install/$isceversion
+prepend-path    PYTHONPATH    $installdir/packages
+
 ```
 
 Now, load this module using the command
 ```bash
-> module load isce/v2.3.3
+> module load isce/latest
 ```
 
 You should see that the activated conda environment is reported
@@ -184,7 +194,7 @@ Once you have set this up, you should be able to see this module listed amongst 
 ```bash
 > module list
   1) use.own        3) gee
-  2) basic          4) isce/v2.3.3
+  2) basic          4) isce2/latest
 ```
 
 If you don't see the isce module file listed, make sure you have loaded the "use.own" module
@@ -194,85 +204,32 @@ If you don't see the isce module file listed, make sure you have loaded the "use
 This instructs modules to look for module files in your HOME/privatemodules folder.
 
 
-###Step 6: Create SConfigISCE file in config/VERSION
-----------------------------------------------------
-
-SConfigISCE is the configuration file used to set paths to the correct directories for building ISCE. We will create a new SConfigISCE for each version to ensure the ability to modify every installed version as needed. The SConfigISCE file needs to be created under ROOT/config/VERSION folder.
-
-```bash
-> cd /home/agram/tools/isce/config/v2.3.3
-> vi SConfigISCE
-```
-
-The template for SConfigISCE is shown below. This is based on https://github.com/conda-forge/isce2-feedstock/blob/master/recipe/build.sh . 
-
-```bash
-
-#Build Directory
-PRJ_SCONS_BUILD = /home/agram/tools/isce/build/v2.3.3 
-
-#Install Directory (must end with isce)
-PRJ_SCONS_INSTALL = /home/agram/tools/isce/install/v2.3.3/isce
-
-#Compilers - set depending on the set of compilers you are using
-CC = gcc      #If using conda-compilers, use output of echo $CC in conda env
-CXX = g++     #If using conda-compilers, use output of echo $CXX in conda env
-FORTRAN = gfortran  #If using conda-compilers, use output of echo $FC in conda env
-
-#Get CONDA_PREFIX value using echo $CONDA_PREFIX in your activated environment
-
-#system lib folders not needed if using conda for everything
-LIBPATH =   {CONDA_PREFIX}/lib /usr/lib64 /usr/lib
-
-#system include folders not needed if using conda for everything
-#PYTHON_INCDIR=`$PYTHON -c "from sysconfig import get_paths; print(get_paths()['include'])"`
-#NUMPY_INCDIR=`$PYTHON -c "import numpy; print(numpy.get_include())"`
-CPPPATH =  {CONDA_PREFIX}/include {PYTHON_INCDIR} {NUMPY_INCDIR} /usr/include
-
-#system include path not needed if using conda for everything
-FORTRANPATH =  {CONDA_PREFIX}/include /usr/include
-
-#use {CONDA_PREFIX}/include and {CONDA_PREFIX}/lib if getting everything via conda
-#system include and lib are only needed when using system motif and X11 packages
-MOTIFLIBPATH = /usr/lib64              # path to libXm.dylib
-X11LIBPATH = /usr/lib64                # path to libXt.dylib
-MOTIFINCPATH = /usr/include          # path to location of the Xm directory with various include files (.h)
-X11INCPATH = /usr/include            # path to location of the X11 directory with various include files
-
-##If you want to enable cuda
-##Make sure you have CUDA settings in your basic modulefile
-ENABLE_CUDA = True
-```
-
-
-
-###Step 7: Install isce
+###Step 6: Install isce
 ----------------------------------------
 
 The first thing to do to use any version of ISCE or install a version of ISCE is to make sure that the correct module file is loaded.
 For this example, if my module file was not already loaded, I execute
 
 ```bash
-module load isce/v2.3.3
+module load isce2/latest
 ```
 
-Change to the source directory and use scons to install.
+Change to the source directory and use cmake+make to install.
 ```bash
-> cd /home/agram/tools/isce/src/v2.3.3/isce
-> scons install
+> cd /home/agram/tools/isce2/build/latest/
+> cmakeisce
+> make
+> make install
 ```
 
-This should install isce. Run "scons install" twice to make sure that all components are installed successfully.
-
-
-###Step 8: Ready to use
+###Step 7: Ready to use
 -----------------------
 You are now ready to use isce. Load the modulefile for the version you want to use and when you want to restore the environment, unload the module
 
 ```bash
-> module load isce/v2.3.3
+> module load isce2/latest
 > .... Your work ....
-> module unload isce
+> module unload isce2
 ```
 
 To switch between versions, unload the module for the current version and load the module corresponding to the version you want to use. Modules is a clean way of managing your environment variables. 
